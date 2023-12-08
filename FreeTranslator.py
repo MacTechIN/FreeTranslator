@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
-
+from gtts import gTTS
+from io import BytesIO
+import base64
 
 
 # Define the translation function using an OpenAPI
