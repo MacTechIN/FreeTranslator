@@ -1,8 +1,6 @@
 import streamlit as st
 import requests
-from gtts import gTTS
-from io import BytesIO
-import base64
+
 
 
 # Define the translation function using an OpenAPI
@@ -40,15 +38,6 @@ def main():
             translation = translate(text_to_translate, source_language, target_language)
             # Display the translation
             st.text_area('Translation', translation, height=150)
-
-            if translation:
-                tts = gTTS(translation, lang=target_language)
-                tts_file = BytesIO()
-                tts.write_to_fp(tts_file)
-                tts_file.seek(0)
-                b64 = base64.b64encode(tts_file.read()).decode()
-                href = f'<a href="data:audio/mp3;base64,{b64}" download="translation.mp3">Download Translation Voice</a>'
-                st.markdown(href, unsafe_allow_html=True)
         else:
             st.error('Please enter some text to translate.')
 
